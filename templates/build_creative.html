@@ -1,0 +1,390 @@
+<!--
+# Copyright 2023 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+-->
+
+<html style="font-family: monospace;">
+<h1 id="main_header">AI Assisted Display Creative</h1>
+
+<head>
+    <meta name="ad.size" content="width={{width}}, height=600">
+    <style id="Generated_CSS">
+        svg, defs, clipPath {
+    height: 0;
+    position: absolute;
+    top: 0; left: 0;
+    }
+
+
+    #figura {
+    position: relative;
+    width: {{width}}px; height: {{height}}px;
+
+    margin: 0px auto;
+    background-color: white;
+    }
+
+    #figura::before {
+    display: block;
+    content: "";
+    position: absolute;
+    top: 0; left: 0;
+    background-image: url('{{img_url | safe}}');
+    background-size: cover;
+    opacity: .4;
+    width: {{width}}px; height: {{height}}px;
+    }
+
+    #capaRecorte {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    width: {{width}}px; height: {{height}}px;
+    }
+
+    #imagen {
+    width: {{width}}px; height: {{height}}px;
+    position: absolute;
+    top: 0; left: 0;
+    cursor: crosshair;
+    }
+
+    #figura area {
+    display: block;
+    }
+
+    #svg-circles {
+        width: {{width}}px;
+        height: {{height}}px;
+    }
+    .outer-circle {
+    display: block;
+    top: 0; left: 0;
+    width: {{width}}px; height: {{height}}px;
+    }
+
+    .inner-circle {
+    display: block;
+    top: 0; left: 0;
+    width: {{width}}px; height: {{height}}px;
+    }
+
+    {{cut_layers | safe}}
+    </style>
+
+    <script id="jscolor" src="static/js/jscolor.js"></script>
+
+    <script id="modifyer">
+
+       function handleColorChange(colorPicker) {
+
+            const color = colorPicker.toHEXString();
+
+            var outerCircles = document.getElementsByClassName("outer-circle");
+            var innerCircles = document.getElementsByClassName("inner-circle");
+
+            for (var i=0;i<outerCircles.length;i++){
+
+                outerCircles[i].setAttribute('stroke', color);
+                innerCircles[i].setAttribute('stroke', color );
+                innerCircles[i].setAttribute('fill', color );
+            }
+        }
+
+        function handleSizeChange(e) {
+
+            const {value, min, max} = e.target;
+
+            var outerCircles = document.getElementsByClassName("outer-circle");
+            var innerCircles = document.getElementsByClassName("inner-circle");
+            var sizeSlider = document.getElementById("circle-size");
+            const formerValue = parseInt(sizeSlider.getAttribute('former-value'));
+            sizeSlider.setAttribute('former-value', value);
+
+            const stepValue = 1;
+            var steps = value - formerValue;
+
+            var ratio = stepValue * Math.abs(steps);
+
+            if (steps != 0){
+                for (var i=0;i<outerCircles.length;i++){
+
+                    outR = parseInt(outerCircles[i].getAttribute('r'));
+                    inR = parseInt(innerCircles[i].getAttribute('r'));
+
+                    if (steps > 0){
+                        outerCircles[i].setAttribute('r', outR + ratio );
+                        innerCircles[i].setAttribute('r', inR + ratio );
+                    } else {
+                        outerCircles[i].setAttribute('r', Math.max(outR - ratio, 1) );
+                        innerCircles[i].setAttribute('r', Math.max(inR - ratio, 1) );
+                    }
+                }
+            }
+
+        }
+    </script>
+    </script>
+    <script id="form_loader" language="javascript">
+
+        window.onload = function() {
+            const sizeSlider = document.getElementById('circle-size');
+            sizeSlider.addEventListener('input', handleSizeChange);
+
+            // Create a new form element
+            let form = document.createElement("form");
+
+            form.action = "#";
+            form.name = "images_urls";
+            form.id = "images_urls";
+            // Get the elements from the array
+            form.appendChild(document.createElement("br"));
+
+            let elements = [{{object_names | safe}}];
+
+            // Loop through the elements and create a text field for each one
+            let table = document.createElement("table")
+
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            let td2 = document.createElement("td");
+
+            let textField = document.createElement("input");
+            textField.id = "default-target-url";
+            textField.type = "text";
+            textField.name = "default-target-url";
+            let label = document.createElement("label");
+            label.id = "label-default-target-url";
+            label.setAttribute('for',"default-target-url");
+            label.innerHTML = "Default Target URL";
+            td1.appendChild(label);
+            td2.appendChild(textField);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            table.appendChild(tr);
+
+            for (let i = 0; i < elements.length; i++) {
+
+                let innerTr = document.createElement("tr");
+                let innerTd1 = document.createElement("td");
+                let innerTd2 = document.createElement("td");
+                let textField = document.createElement("input");
+                textField.id = "text-" + elements[i];
+                textField.type = "text";
+                textField.name = elements[i];
+                let label = document.createElement("label");
+                label.id = "label-" + elements[i];
+                label.setAttribute('for', elements[i]);
+                label.innerHTML = elements[i];
+                innerTd1.appendChild(label);
+                innerTd2.appendChild(textField);
+                innerTr.appendChild(innerTd1);
+                innerTr.appendChild(innerTd2);
+                // Add the text field to the form
+                table.appendChild(innerTr);
+            }
+
+            // Add a submit button to the form
+            tr = document.createElement("tr");
+            td1 = document.createElement("td");
+            td2 = document.createElement("td");
+
+            let submitButton = document.createElement("button");
+            submitButton.textContent = "Update";
+            submitButton.setAttribute('onclick', 'modifyElements();return false');
+
+            // Add the submit button to the form
+            //form.appendChild(submitButton);
+
+            let generateButton = document.createElement("button");
+            generateButton.textContent = "Generate Creative";
+            generateButton.setAttribute('onclick', 'saveToZip();return false');
+            td1.appendChild(submitButton);
+            td2.appendChild(generateButton);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            table.appendChild(tr);
+            form.appendChild(table);
+
+            // Append the form to the document body
+            document.getElementById("objects_form").appendChild(form);
+
+        }
+    </script>
+    <script id="update_creative" language="javascript">
+
+        function modifyElements() {
+
+            var elements = [{{object_names | safe}}];
+            var area;
+            var textInput;
+
+            textInput =  document.getElementById("default-target-url");
+            imgLinkWrapper = document.getElementById("img-link-wrapper");
+            imgLinkWrapper.setAttribute("href", textInput.value)
+
+            for (let i = 0; i < elements.length; i++) {
+
+                textInput = document.getElementById("text-" + elements[i]);
+                area = document.getElementById("area-" + elements[i]);
+                label = document.getElementById("label-" + elements[i]);
+                outerCircle = document.getElementById("outer-circle-" + elements[i]);
+                innerCircle = document.getElementById("inner-circle-" + elements[i]);
+                clipPath = document.getElementById(elements[i]);
+
+                if ( (textInput != null) && (textInput.value != null) && (textInput.value.length > 0)){
+                    area.setAttribute("href", textInput.value);
+                } else {
+                    if (area != null){area.remove();}
+                    if (textInput != null){textInput.remove();}
+                    if (label != null){label.remove();}
+                    if (clipPath != null){clipPath.remove();}
+                    if (outerCircle != null){outerCircle.remove();}
+                    if (innerCircle != null){innerCircle.remove();}
+                }
+            }
+            alert("Successfully Updated!")
+            return false;
+        }
+
+
+
+    </script>
+
+    <script id="save_to_zip">
+
+        function saveToZip(){
+
+            var elements = [{{object_names | safe}}];
+
+            var output = document.getElementById('output');
+            copy = document.cloneNode(true);
+
+            var area;
+            var textInput;
+
+            for (let i = 0; i < elements.length; i++) {
+                area = copy.getElementById("area-" + elements[i]);
+
+                if (area != null) {
+                    area.removeAttribute("title");
+                }
+            }
+
+            elem = copy.getElementById('main_header');
+            elem.remove();
+
+            elem = copy.getElementById('form_loader');
+            elem.remove();
+
+            elem = copy.getElementById('update_creative');
+            elem.remove();
+
+            elem = copy.getElementById('jscolor');
+            elem.remove();
+
+            elem = copy.getElementById('images_urls');
+            elem.remove();
+
+            elem = copy.getElementById('save_to_zip');
+            elem.remove();
+
+            elem = copy.getElementById('modifyer');
+            elem.remove();
+
+            elem = copy.getElementById('circle-size-slider');
+            elem.remove();
+
+            elem = copy.getElementById('circle-color-slider');
+            elem.remove();
+
+            image_name = "{{img_name}}";
+
+
+            copy.documentElement.innerHTML = copy.documentElement.innerHTML.replaceAll("{{img_url | safe}}", 'images/' + image_name);
+            copy.documentElement.innerHTML = copy.documentElement.innerHTML.replaceAll("{{img_url}}", 'images/' + image_name);
+
+            console.log(copy.documentElement.innerHTML);
+            copy.documentElement.innerHTML = copy.documentElement.innerHTML.replaceAll("static/images/transparent.gif", 'images/transparent.gif');
+            console.log(copy.documentElement.innerHTML);
+
+            const html_blob = new Blob([copy.documentElement.innerHTML], {type: 'text/html'});
+
+            var formData = new FormData();
+            formData.append("html_file",  html_blob, "creative.html");
+            formData.append("img_url", document.querySelector("img[id='capaRecorte']").src);
+            formData.append("img_name", image_name);
+
+            fetch("/generate_zip", {
+                method: "POST",
+                body: formData,
+                })
+                .then((response) => response.text())
+                .then((responseText) => {
+                    location.href =  responseText;
+                    alert('File downloaded. Clean & Start Over');
+                    setTimeout(() => { location.href = '/clean?zip_file_url='+ encodeURI(responseText) + '&img_url=' + encodeURI('{{img_url | safe}}'); }, 1000);
+                });
+        }
+    </script>
+</head>
+
+<body>
+<table>
+    <tr>
+    <td>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"  >
+<defs>
+{{clip_paths | safe}}
+</defs>
+</svg>
+
+<a id="img-link-wrapper" href="" target="_blank">
+    <figure id=figura>
+        <map name="recortes" id=recortes>
+        {{map_areas | safe}}
+        <img id="capaRecorte" src="{{img_url | safe}}">
+        </map>
+        <svg id="svg-circles" xmlns="http://www.w3.org/2000/svg" version="1.1">
+            {{circles | safe}}
+        </svg>
+        <img src="static/images/transparent.gif" id="imagen" alt="" usemap="#recortes" >
+    </figure>
+</a>
+</td>
+
+<td>
+    <div id="circle-size-slider" class="slidecontainer">
+        <label>Circle Size</label>
+        <input id="circle-size" type="range" min="1" max="10" value="5" former-value="5" class="slider" id="Slider">
+    </div>
+    <div id="circle-color-slider" class="slidecontainer">
+        <label>Circle Color</label>
+
+        <input id ="circle-color" data-jscolor="{
+            onInput:'handleColorChange(this)',
+            format: 'hex'
+            }">
+    </div>
+    <div id="objects_form">
+
+    </div>
+</td>
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>
