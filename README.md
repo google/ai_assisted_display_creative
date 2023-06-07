@@ -20,11 +20,12 @@ Google cloud user with privileges over App Engine and Vision API (ideally Owner 
 ## How to deploy
 
 - Clone this repository onto your local machine
-by running ```git clone http://github.com/google/ai_assisted_display_creatives```
-- Navigate to the project folder ```cd ai_assisted_display_creatives/```
+by running ```git clone http://github.com/google/ai_assisted_display_creative```
+- Navigate to the project folder ```cd ai_assisted_display_creative/```
 - Make sure you edit the ```variables.tf``` file with all the relevant values.
-- Run in the shell: `gcloud auth application-default login` [more details here](https://cloud.google.com/vision/docs/setup)
-- Set the environment variable `GOOGLE_APPLICATION_CREDENTIALS` to your user key file after running
+- Run in the shell: ```gcloud auth application-default login``` [more details here](https://cloud.google.com/vision/docs/setup) and follow the steps to copy the code.
+- Set the environment variable ```GOOGLE_APPLICATION_CREDENTIALS``` to the generated user key file after running the command above. It says something similar to ```Credentials saved to file: [/usr/local/xxx/home/xxxx/.config/gcloud/application_default_credentials.json]```. An example of the export command would be: ```export GOOGLE_APPLICATION_CREDENTIALS=/usr/local/xxx/home/xxxx/.config/gcloud/application_default_credentials.json```
+- Run in the shell: terraform init
 - Run in the shell: terraform apply
 - Type `yes` and hit return
 - When deployment is complete, the URL must be displayed in the shell. Somtehing like:
@@ -34,9 +35,11 @@ Deployed service [default] to [https://<my-project>.<region>.r.appspot.com]
 ## How to run it in your local computer
 
 - Clone this repository onto your local machine
-by running ```git clone http://github.com/google/ai_assisted_display_creatives```
-- Navigate to the project folder ```cd ai_assisted_display_creatives/```
-- Make sure you replace the `vision_api_key` value in  the ```variables.tf```. No other values are required
+by running ```git clone http://github.com/google/ai_assisted_display_creative```
+- Navigate to the project folder ```cd ai_assisted_display_creative/```
+- Run in the shell: ```gcloud auth application-default login``` [more details here](https://cloud.google.com/vision/docs/setup) and follow the steps to copy the code.
+- Set the environment variable ```GOOGLE_APPLICATION_CREDENTIALS``` to the generated user key file after running the command above. It says something similar to ```Credentials saved to file: [/usr/local/xxx/home/xxxx/.config/gcloud/application_default_credentials.json]```. An example of the export command would be: ```export GOOGLE_APPLICATION_CREDENTIALS=/usr/local/xxx/home/xxxx/.config/gcloud/application_default_credentials.json```
+- Make sure you replace the ```vision_api_key``` value in  the ```variables.tf```. No other values are required
 - Run in the shell: sh run_local.sh
 - Open a browser and go to [localhost:8000](http://localhost:8000)
 
