@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import json
-from types import Dict
+from typing import Dict
 from urllib.request import Request
 from urllib.request import urlopen
 import cv2

@@ -27,7 +27,6 @@ find_config_value()
 
   
   NAME=$1
-
   FILE="./variables.tf"
   LINE_NO=$(grep -n "$NAME" "$FILE" | sed "s/:.*//")
 
@@ -51,8 +50,7 @@ find_config_value()
   echo "$RESULT"
 }
 
-export API_KEY=$(find_config_value "variable \"vision_api_key\"")
-pip install -r requirements.txt
-pip install gunicorn
+export API_KEY=$(find_config_value "variable vision_api_key")
+pip install -r requirements_local.txt --force-reinstall --require-hashes
 cp third_party/jscolor.js static/js/
 gunicorn -w 4 main:app
