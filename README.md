@@ -20,7 +20,7 @@ Google cloud user with privileges over App Engine and Vision API (ideally Owner 
 ## How to deploy
 
 - Clone this repository onto your local machine
-by running ```git clone http://github.com/google/ai_assisted_display_creative```
+by running ```git clone http://github.com/google/ai_assisted_display_creative.git```
 - Navigate to the project folder ```cd ai_assisted_display_creative/```
 - Make sure you edit the ```variables.tf``` file with all the relevant values.
 - Run in the shell: ```gcloud auth application-default login``` [more details here](https://cloud.google.com/vision/docs/setup) and follow the steps to copy the code.

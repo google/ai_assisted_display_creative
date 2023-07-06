@@ -17,53 +17,55 @@
 <h2 style="font-family: monospace;">AI Assisted Display Creative</h2>
 <form id="configuration" name="configuration" method="POST" action="/build_creative">
   <table>
-    <tr><td>
-    <label>Image URL</label>
-  </td>
-<td>
-  <input id="img_url" name="img_url" type="text"/>
-</td>
-</tr>
-<tr><td>
-  <label>Creative Size</label>
-</td>
-<td>
-<select id="img_dimensions" name="img_dimensions">
-  <option value="200x200">200 × 200 Small square</option>
-  <option value="240x400">240 × 400 Vertical rectangle</option>
-  <option value="250x250">250 × 250 Square</option>
-  <option value="250x360">250 × 360 Triple widescreen</option>
-  <option value="300x250">300 × 250 Inline rectangle</option>
-  <option value="336x280">336 × 280 Large rectangle</option>
-  <option value="580x400">580 × 400 Netboard</option>
-  <option value="120x600">120 × 600 Skyscraper</option>
-  <option value="160x600">160 × 600 Wide skyscraper</option>
-  <option value="300x600">300 × 600 Half-page ad</option>
-  <option value="300x1050">300 × 1050 Portrait</option>
-  <option value="468x60">468 × 60 Banner</option>
-  <option value="728x90">728 × 90 Leaderboard</option>
-  <option value="930x180">930 × 180 Top banner</option>
-  <option value="970x90">970 × 90 Large leaderboard</option>
-  <option value="970x250">970 × 250 Billboard</option>
-  <option value="980x120">980 × 120 Panorama</option>
-  <option value="300x50">300 × 50 Mobile banner</option>
-  <option value="320x50">320 × 50 Mobile banner</option>
-  <option value="320x100">320 × 100 Large mobile banner</option>
-</select>
-</td>
-</tr>
-<tr>
-  <td>
-  <label>Object Detection Confidence Threshold</label>
-  </td>
-  <td>
-  <input id="threshold" name="threshold" type="text" value="0.85"/>
-</td>
-</tr>
-<tr>
-<td>
-  <button type="submit">Process</button>
-</td>
-</tr>
-</table>
+    <tr>
+      <td>
+        <label>Image URL</label>
+      </td>
+      <td>
+        <input id="img_url" name="img_url" type="text" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>Creative Size</label>
+      </td>
+      <td>
+        <select id="img_dimensions" name="img_dimensions">
+          <option value="200x200">200 × 200 Small square</option>
+          <option value="240x400">240 × 400 Vertical rectangle</option>
+          <option value="250x250">250 × 250 Square</option>
+          <option value="250x360">250 × 360 Triple widescreen</option>
+          <option value="300x250">300 × 250 Inline rectangle</option>
+          <option value="336x280">336 × 280 Large rectangle</option>
+          <option value="580x400">580 × 400 Netboard</option>
+          <option value="120x600">120 × 600 Skyscraper</option>
+          <option value="160x600">160 × 600 Wide skyscraper</option>
+          <option value="300x600">300 × 600 Half-page ad</option>
+          <option value="300x1050">300 × 1050 Portrait</option>
+          <option value="468x60">468 × 60 Banner</option>
+          <option value="728x90">728 × 90 Leaderboard</option>
+          <option value="930x180">930 × 180 Top banner</option>
+          <option value="970x90">970 × 90 Large leaderboard</option>
+          <option value="970x250">970 × 250 Billboard</option>
+          <option value="980x120">980 × 120 Panorama</option>
+          <option value="300x50">300 × 50 Mobile banner</option>
+          <option value="320x50">320 × 50 Mobile banner</option>
+          <option value="320x100">320 × 100 Large mobile banner</option>
+        </select>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <label>Object Detection Confidence Threshold</label>
+      </td>
+      <td>
+        <input id="threshold" name="threshold" type="text" value="0.85" />
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <button type="submit">Process</button>
+      </td>
+    </tr>
+  </table>
 </form>

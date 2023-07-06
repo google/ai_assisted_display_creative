@@ -35,6 +35,9 @@ API_KEY = os.environ.get('API_KEY')
 TRANSPARENT_GIF = 'static/images/transparent.gif'
 OUTPUT_HTML_FILE_NAME = 'creative.html'
 MINUTES_TO_EXPIRE = 60
+CSS_FILES = ['gwdgooglead_style.css', 'gwdpage_style.css', 'gwdimage_style.css', 'gwdpagedeck_style.css', 'gwdtaparea_style.css']
+JS_FILES = ['Enabler.js', 'gwdtaparea_min.js', 'gwdpage_min.js', 'gwd-events-support.1.0.js', 'gwd_webcomponents_v1_min.js', 'gwdgooglead_min.js', 'gwdpagedeck_min.js', 'gwdimage_min.js']
+
 
 
 def _is_local():
@@ -148,15 +151,27 @@ def _create_zip(zip_file_name, html_file, img_url, img_name, base_url):
   mem_zip = BytesIO()
 
   transparent_url = f'{base_url}{TRANSPARENT_GIF}'
-  print(transparent_url)
+  
+ 
   files = []
+  files_js = []
+  files_css = []
   transparent_file_name = TRANSPARENT_GIF.split('/')[-1]
   files.append((_read_image(img_url), img_name))
   files.append((_read_image(transparent_url), transparent_file_name))
+  for file_name in CSS_FILES:
+    files_css.append((_read_image(f'{base_url}static/css/{file_name}'), file_name))
+  for file_name in JS_FILES:
+    files_js.append((_read_image(f'{base_url}static/js/{file_name}'), file_name))
+ 
 
   with zipfile.ZipFile(mem_zip, mode='w') as zf:
     for f, name in files:
       zf.writestr(f'{zip_file_name}/images/{name}', f)
+    for f, name in files_css:
+      zf.writestr(f'{zip_file_name}/css/{name}', f)
+    for f, name in files_js:
+      zf.writestr(f'{zip_file_name}/js/{name}', f)
     zf.writestr(f'{zip_file_name}/{OUTPUT_HTML_FILE_NAME}', html_file)
 
   return mem_zip.getvalue()
@@ -313,8 +328,8 @@ def _process_image(img_url, threshold, img_dimensions):
 
   new_img_url = parse.unquote(new_img_url)
 
-  (clip_paths, map_areas, cut_layers, object_names, circles) = (
-      generate_html5_parts(polygons, new_img_url)
+  (clip_paths, map_areas, tap_areas_hover, tap_areas_active, exit_metrics, cut_layers_hover, cut_layers_active, object_names, circles) = (
+      generate_html5_parts(polygons)
   )
 
   return (
@@ -324,7 +339,11 @@ def _process_image(img_url, threshold, img_dimensions):
       height,
       clip_paths,
       map_areas,
-      cut_layers,
+      tap_areas_hover,
+      tap_areas_active,
+      exit_metrics,
+      cut_layers_hover,
+      cut_layers_active,
       object_names,
       circles,
   )
@@ -361,7 +380,11 @@ def build_creative():
         height,
         clip_paths,
         map_areas,
-        cut_layers,
+        tap_areas_hover,
+        tap_areas_active,
+        exit_metrics,
+        cut_layers_hover,
+        cut_layers_active,
         object_names,
         circles,
     ) = _process_image(img_url, threshold, img_dimensions)
@@ -373,9 +396,13 @@ def build_creative():
         width=width,
         height=height,
         object_names=','.join(object_names),
-        cut_layers=Markup('\n'.join(cut_layers)).unescape(),
+        cut_layers_hover=Markup('\n'.join(cut_layers_hover)).unescape(),
+        cut_layers_active=Markup('\n'.join(cut_layers_active)).unescape(),
         clip_paths=Markup('\n'.join(clip_paths)).unescape(),
         map_areas=Markup('\n'.join(map_areas)).unescape(),
+        tap_areas_hover=Markup('\n'.join(tap_areas_hover)).unescape(),
+        tap_areas_active=Markup('\n'.join(tap_areas_active)).unescape(),
+        exit_metrics=Markup('\n'.join(exit_metrics)).unescape(),
         circles=Markup('\n'.join(circles)).unescape(),
     )
   except Exception as ex:
