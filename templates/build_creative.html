@@ -14,296 +14,164 @@
 # limitations under the License.
 -->
 
-<html style="font-family: monospace">
+<html style="font-family: monospace;">
 <h1 id="main_header">AI Assisted Display Creative</h1>
 
 <head>
     <script id="jscolor" src="static/js/jscolor.js"></script>
     <script id="modifyer" src="static/js/color_functions.js"></script>
 
-    <link href="static/css/gwdpage_style.css" rel="stylesheet" data-version="13" data-exports-type="gwd-page" />
-    <link href="static/css/gwdpagedeck_style.css" rel="stylesheet" data-version="14" data-exports-type="gwd-pagedeck" />
-    <link href="static/css/gwdgooglead_style.css" rel="stylesheet" data-version="9" data-exports-type="gwd-google-ad" />
-    <link href="static/css/gwdimage_style.css" rel="stylesheet" data-version="17" data-exports-type="gwd-image" />
-    <link href="static/css/gwdtaparea_style.css" rel="stylesheet" data-version="7" data-exports-type="gwd-taparea" />
+    <link href="static/css/gwdpage_style.css" rel="stylesheet" data-version="13" data-exports-type="gwd-page">
+    <link href="static/css/gwdpagedeck_style.css" rel="stylesheet" data-version="14" data-exports-type="gwd-pagedeck">
+    <link href="static/css/gwdgooglead_style.css" rel="stylesheet" data-version="9" data-exports-type="gwd-google-ad">
+    <link href="static/css/gwdimage_style.css" rel="stylesheet" data-version="17" data-exports-type="gwd-image">
+    <link href="static/css/gwdtaparea_style.css" rel="stylesheet" data-version="7" data-exports-type="gwd-taparea">
 
-    <style>
-        .jscolor-wrap,
-        .jscolor-wrap div,
-        .jscolor-wrap canvas {
-            position: static;
-            display: block;
-            visibility: visible;
-            overflow: visible;
-            margin: 0px;
-            padding: 0px;
-            border: none;
-            border-radius: 0px;
-            outline: none;
-            z-index: auto;
-            float: none;
-            width: auto;
-            height: auto;
-            inset: auto;
-            min-width: 0px;
-            min-height: 0px;
-            max-width: none;
-            max-height: none;
-            background: none;
-            clip: auto;
-            opacity: 1;
-            transform: none;
-            -webkit-transform: none;
-            -moz-transform: none;
-            box-shadow: none;
-            box-sizing: content-box;
-        }
-    </style>
-    <meta name="ad.size" content="width={{width}}, height={{height}}" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>.jscolor-wrap,
+.jscolor-wrap div,
+.jscolor-wrap canvas {
+    position: static;
+    display: block;
+    visibility: visible;
+    overflow: visible;
+    margin: 0px;
+    padding: 0px;
+    border: none;
+    border-radius: 0px;
+    outline: none;
+    z-index: auto;
+    float: none;
+    width: auto;
+    height: auto;
+    inset: auto;
+    min-width: 0px;
+    min-height: 0px;
+    max-width: none;
+    max-height: none;
+    background: none;
+    clip: auto;
+    opacity: 1;
+    transform: none;
+    -webkit-transform: none;
+    -moz-transform: none;
+    box-shadow: none;
+    box-sizing: content-box;
+}</style>
+    <meta name="ad.size" content="width={{width}}, height={{height}}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style id="Generated_CSS">
-        svg,
-        defs,
-        clipPath {
-            height: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
+        svg, defs, clipPath {
+    height: 0;
+    position: absolute;
+    top: 0; left: 0;
+    }
 
 
-        #figura {
-            position: relative;
+    #figura {
+        position: relative;
+        width: {{width}}px; height: {{height}}px;
 
-            width: {
-                    {
-                    width
-                }
-            }
+        margin: 0px auto;
+        background-color: white;
+    }
 
-            px;
+    #figura::before {
+        display: block;
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        background-image: url('{{img_url | safe}}');
+        background-size: cover;
+        opacity: .4;
+        width: {{width}}px; height: {{height}}px;
+    }
 
-            height: {
-                    {
-                    height
-                }
-            }
+    #capaRecorte {
+        display: block;
+        position: absolute;
+        top: 0; left: 0;
+        width: {{width}}px; height: {{height}}px;
+    }
 
-            px;
+    #imagen {
+        width: {{width}}px; height: {{height}}px;
+        position: absolute;
+        top: 0; left: 0;
+        cursor: crosshair;
+    }
 
-            margin: 0px auto;
-            background-color: white;
-        }
+    #figura area {
+        display: block;
+    }
 
-        #figura::before {
-            display: block;
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            background-image: url('{{img_url | safe}}');
-            background-size: cover;
-            opacity: .4;
+    #svg-circles {
+        width: {{width}}px;
+        height: {{height}}px;
+    }
+    .outer-circle {
+        display: block;
+        top: 0; left: 0;
+        width: {{width}}px; height: {{height}}px;
+    }
 
-            width: {
-                    {
-                    width
-                }
-            }
+    .inner-circle {
+        display: block;
+        top: 0; left: 0;
+        width: {{width}}px; height: {{height}}px;
+    }
 
-            px;
+    @media (hover: hover ) {
+        {{cut_layers_hover | safe}}
 
-            height: {
-                    {
-                    height
-                }
-            }
+        {{tap_areas_hover | safe}}
+    }
 
-            px;
-        }
+    @media (hover: none ) {
+        {{cut_layers_active | safe}}
 
-        #capaRecorte {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
+        {{tap_areas_active | safe}}
+    }
 
-            width: {
-                    {
-                    width
-                }
-            }
-
-            px;
-
-            height: {
-                    {
-                    height
-                }
-            }
-
-            px;
-        }
-
-        #imagen {
-            width: {
-                    {
-                    width
-                }
-            }
-
-            px;
-
-            height: {
-                    {
-                    height
-                }
-            }
-
-            px;
-            position: absolute;
-            top: 0;
-            left: 0;
-            cursor: crosshair;
-        }
-
-        #figura area {
-            display: block;
-        }
-
-        #svg-circles {
-            width: {
-                    {
-                    width
-                }
-            }
-
-            px;
-
-            height: {
-                    {
-                    height
-                }
-            }
-
-            px;
-        }
-
-        .outer-circle {
-            display: block;
-            top: 0;
-            left: 0;
-
-            width: {
-                    {
-                    width
-                }
-            }
-
-            px;
-
-            height: {
-                    {
-                    height
-                }
-            }
-
-            px;
-        }
-
-        .inner-circle {
-            display: block;
-            top: 0;
-            left: 0;
-
-            width: {
-                    {
-                    width
-                }
-            }
-
-            px;
-
-            height: {
-                    {
-                    height
-                }
-            }
-
-            px;
-        }
-
-        @media (hover: hover) {
-                {
-                    {
-                    cut_layers_hover | safe
-                }
-            }
-
-                {
-                    {
-                    tap_areas_hover | safe
-                }
-            }
-        }
-
-        @media (hover: none) {
-                {
-                    {
-                    cut_layers_active | safe
-                }
-            }
-
-                {
-                    {
-                    tap_areas_active | safe
-                }
-            }
-        }
     </style>
 
-    <script data-source="gwd_webcomponents_v1_min.js" data-version="2" data-exports-type="gwd_webcomponents_v1"
-        src="static/js/gwd_webcomponents_v1_min.js"></script>
+    <script data-source="gwd_webcomponents_v1_min.js" data-version="2" data-exports-type="gwd_webcomponents_v1" src="static/js/gwd_webcomponents_v1_min.js"></script>
     <script type="text/javascript" src="static/js/Enabler.js"></script>
-    <script data-source="gwdpage_min.js" data-version="13" data-exports-type="gwd-page"
-        src="static/js/gwdpage_min.js"></script>
-    <script data-source="gwdpagedeck_min.js" data-version="14" data-exports-type="gwd-pagedeck"
-        src="static/js/gwdpagedeck_min.js"></script>
-    <script data-source="gwdgooglead_min.js" data-version="9" data-exports-type="gwd-google-ad"
-        src="static/js/gwdgooglead_min.js"></script>
-    <script data-source="gwdimage_min.js" data-version="17" data-exports-type="gwd-image"
-        src="static/js/gwdimage_min.js"></script>
-    <script data-source="gwdtaparea_min.js" data-version="7" data-exports-type="gwd-taparea"
-        src="static/js/gwdtaparea_min.js"></script>
+    <script data-source="gwdpage_min.js" data-version="13" data-exports-type="gwd-page" src="static/js/gwdpage_min.js"></script>
+    <script data-source="gwdpagedeck_min.js" data-version="14" data-exports-type="gwd-pagedeck" src="static/js/gwdpagedeck_min.js"></script>
+    <script data-source="gwdgooglead_min.js" data-version="9" data-exports-type="gwd-google-ad" src="static/js/gwdgooglead_min.js"></script>
+    <script data-source="gwdimage_min.js" data-version="17" data-exports-type="gwd-image" src="static/js/gwdimage_min.js"></script>
+    <script data-source="gwdtaparea_min.js" data-version="7" data-exports-type="gwd-taparea" src="static/js/gwdtaparea_min.js"></script>
     <script type="text/javascript" gwd-events="support" src="static/js/gwd-events-support.1.0.js"></script>
 
+
     <script type="text/javascript">
-        // If true, start function. If false, listen for INIT.
-        if (Enabler.isInitialized()) {
-            enablerInitHandler();
-        } else {
-            Enabler.addEventListener(studio.events.StudioEvent.INIT, enablerInitHandler);
-        }
-
-        // If true, start function. If false, listen for PAGE_LOADED.
-        if (Enabler.isPageLoaded()) {
-            pageLoadedHandler();
-        } else {
-            Enabler.addEventListener(studio.events.StudioEvent.PAGE_LOADED, pageLoadedHandler);
-        }
-
-        function pageLoadedHandler() {
-            // Load in additional assets or add animation/video
-            //addListeners();
-        }
-
-        function enablerInitHandler() {
-            // Start ad, initialize animation,
-            // load in your image assets, call Enabler methods,
-            // and/or include other Studio modules.
-        }
+      // If true, start function. If false, listen for INIT.
+      if (Enabler.isInitialized()) {
+        enablerInitHandler();
+      } else {
+        Enabler.addEventListener(studio.events.StudioEvent.INIT, enablerInitHandler);
+      }
+  
+      // If true, start function. If false, listen for PAGE_LOADED.
+      if (Enabler.isPageLoaded()) {
+        pageLoadedHandler();
+      } else {
+        Enabler.addEventListener(studio.events.StudioEvent.PAGE_LOADED, pageLoadedHandler);
+      }
+  
+      function pageLoadedHandler() {
+        // Load in additional assets or add animation/video
+        //addListeners();
+      }
+  
+      function enablerInitHandler() {
+        // Start ad, initialize animation,
+        // load in your image assets, call Enabler methods,
+        // and/or include other Studio modules.
+      }
     </script>
+
 
     <script id="form_loader" language="javascript">
 
@@ -321,168 +189,168 @@
             // Get the elements from the array
             form.appendChild(document.createElement("br"));
 
-            let elements = [{{ object_names | safe}}];
+            let elements = [{{object_names | safe}}];
 
-        // Loop through the elements and create a text field for each one
-        let table = document.createElement("table")
+            // Loop through the elements and create a text field for each one
+            let table = document.createElement("table")
 
-        let tr = document.createElement("tr");
-        let td1 = document.createElement("td");
-        let td2 = document.createElement("td");
+            let tr = document.createElement("tr");
+            let td1 = document.createElement("td");
+            let td2 = document.createElement("td");
 
-        let textField = document.createElement("input");
-        textField.id = "default-target-url";
-        textField.type = "text";
-        textField.name = "default-target-url";
-        let label = document.createElement("label");
-        label.id = "label-default-target-url";
-        label.setAttribute('for', "default-target-url");
-        label.innerHTML = "Default Target URL";
-        td1.appendChild(label);
-        td2.appendChild(textField);
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        table.appendChild(tr);
-
-        for (let i = 0; i < elements.length; i++) {
-
-            let innerTr = document.createElement("tr");
-            let innerTd1 = document.createElement("td");
-            let innerTd2 = document.createElement("td");
             let textField = document.createElement("input");
-            textField.id = "text-" + elements[i];
+            textField.id = "default-target-url";
             textField.type = "text";
-            textField.name = elements[i];
+            textField.name = "default-target-url";
             let label = document.createElement("label");
-            label.id = "label-" + elements[i];
-            label.setAttribute('for', elements[i]);
-            label.innerHTML = elements[i];
-            innerTd1.appendChild(label);
-            innerTd2.appendChild(textField);
-            innerTr.appendChild(innerTd1);
-            innerTr.appendChild(innerTd2);
-            // Add the text field to the form
-            table.appendChild(innerTr);
+            label.id = "label-default-target-url";
+            label.setAttribute('for',"default-target-url");
+            label.innerHTML = "Default Target URL";
+            td1.appendChild(label);
+            td2.appendChild(textField);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            table.appendChild(tr);
+
+            for (let i = 0; i < elements.length; i++) {
+
+                let innerTr = document.createElement("tr");
+                let innerTd1 = document.createElement("td");
+                let innerTd2 = document.createElement("td");
+                let textField = document.createElement("input");
+                textField.id = "text-" + elements[i];
+                textField.type = "text";
+                textField.name = elements[i];
+                let label = document.createElement("label");
+                label.id = "label-" + elements[i];
+                label.setAttribute('for', elements[i]);
+                label.innerHTML = elements[i];
+                innerTd1.appendChild(label);
+                innerTd2.appendChild(textField);
+                innerTr.appendChild(innerTd1);
+                innerTr.appendChild(innerTd2);
+                // Add the text field to the form
+                table.appendChild(innerTr);
+            }
+
+            // Add a submit button to the form
+            tr = document.createElement("tr");
+            td1 = document.createElement("td");
+            td2 = document.createElement("td");
+
+            let submitButton = document.createElement("button");
+            submitButton.textContent = "Update";
+            submitButton.setAttribute('onclick', 'modifyElements();return false');
+
+            // Add the submit button to the form
+            //form.appendChild(submitButton);
+
+            let generateButton = document.createElement("button");
+            generateButton.textContent = "Generate Creative";
+            generateButton.setAttribute('onclick', 'saveToZip();return false');
+            td1.appendChild(submitButton);
+            td2.appendChild(generateButton);
+            tr.appendChild(td1);
+            tr.appendChild(td2);
+            table.appendChild(tr);
+            form.appendChild(table);
+
+            // Append the form to the document body
+            document.getElementById("objects_form").appendChild(form);
+
         }
-
-        // Add a submit button to the form
-        tr = document.createElement("tr");
-        td1 = document.createElement("td");
-        td2 = document.createElement("td");
-
-        let submitButton = document.createElement("button");
-        submitButton.textContent = "Update";
-        submitButton.setAttribute('onclick', 'modifyElements();return false');
-
-        // Add the submit button to the form
-        //form.appendChild(submitButton);
-
-        let generateButton = document.createElement("button");
-        generateButton.textContent = "Generate Creative";
-        generateButton.setAttribute('onclick', 'saveToZip();return false');
-        td1.appendChild(submitButton);
-        td2.appendChild(generateButton);
-        tr.appendChild(td1);
-        tr.appendChild(td2);
-        table.appendChild(tr);
-        form.appendChild(table);
-
-        // Append the form to the document body
-        document.getElementById("objects_form").appendChild(form);
-
-      }
         window.addEventListener('DOMContentLoaded',
-            loadForm, false);
+        loadForm, false);
     </script>
 
     <script id="update_creative" language="javascript">
 
         function modifyElements() {
+            
+            var elements = [{{object_names | safe}}];
+            var area;
+            var textInput;
 
-            var elements = [{{ object_names | safe}}];
-        var area;
-        var textInput;
-
-        textInput = document.getElementById("default-target-url");
-
-        //imgLinkWrapper = document.getElementById("img-link-wrapper");
-        //imgLinkWrapper.setAttribute("href", textInput.value)
-        var newElems = [];
-        if ((textInput != null) && (textInput.value != null) && (textInput.value.length > 0)) {
-            newElems.push(["default", textInput.value]);
-            tapArea = document.getElementById("gwd-taparea-default");
-            tapArea.setAttribute('title', "default:" + textInput.value);
-        }
-
-
-        for (let i = 0; i < elements.length; i++) {
-
-            textInput = document.getElementById("text-" + elements[i]);
-            area = document.getElementById("area-" + elements[i]);
-            tapArea = document.getElementById("gwd-taparea-" + elements[i]);
-            exitMetric = document.getElementById("exit-metric-" + elements[i]);
-            label = document.getElementById("label-" + elements[i]);
-            outerCircle = document.getElementById("outer-circle-" + elements[i]);
-            innerCircle = document.getElementById("inner-circle-" + elements[i]);
-            clipPath = document.getElementById(elements[i]);
-            if ((textInput != null) && (textInput.value != null) && (textInput.value.length > 0)) {
-
-                newElems.push([elements[i], textInput.value]);
-                if (area != null) {
-                    area.setAttribute('title', elements[i] + ":" + textInput.value);
-                }
-            } else {
-                if (tapArea != null) { tapArea.remove(); }
-                if (exitMetric != null) { exitMetric.remove(); }
-                if (area != null) { area.remove(); }
-                if (textInput != null) { textInput.remove(); }
-                if (label != null) { label.remove(); }
-                if (clipPath != null) { clipPath.remove(); }
-                if (outerCircle != null) { outerCircle.remove(); }
-                if (innerCircle != null) { innerCircle.remove(); }
+            textInput =  document.getElementById("default-target-url");
+       
+            //imgLinkWrapper = document.getElementById("img-link-wrapper");
+            //imgLinkWrapper.setAttribute("href", textInput.value)
+            var newElems = [];
+            if ( (textInput != null) && (textInput.value != null) && (textInput.value.length > 0)){
+                newElems.push(["default", textInput.value]);
+                tapArea = document.getElementById("gwd-taparea-default");
+                tapArea.setAttribute('title', "default:" + textInput.value);
             }
+
+            
+            for (let i = 0; i < elements.length; i++) {
+
+                textInput = document.getElementById("text-" + elements[i]);
+                area = document.getElementById("area-" + elements[i]);
+                tapArea = document.getElementById("gwd-taparea-" + elements[i]);
+                exitMetric = document.getElementById("exit-metric-" + elements[i]);
+                label = document.getElementById("label-" + elements[i]);
+                outerCircle = document.getElementById("outer-circle-" + elements[i]);
+                innerCircle = document.getElementById("inner-circle-" + elements[i]);
+                clipPath = document.getElementById(elements[i]);
+                if ( (textInput != null) && (textInput.value != null) && (textInput.value.length > 0)){
+                   
+                    newElems.push([elements[i],textInput.value]);
+                    if (area != null) {
+                        area.setAttribute('title', elements[i] + ":" + textInput.value);
+                    }
+                } else {
+                    if (tapArea != null){tapArea.remove();}
+                    if (exitMetric != null){exitMetric.remove();}
+                    if (area != null){area.remove();}
+                    if (textInput != null){textInput.remove();}
+                    if (label != null){label.remove();}
+                    if (clipPath != null){clipPath.remove();}
+                    if (outerCircle != null){outerCircle.remove();}
+                    if (innerCircle != null){innerCircle.remove();}
+                }
+            }
+            build_handler_functions(newElems);
+            build_handlers_registration(newElems);
+            build_studio_exports(newElems);
+            
+            
+            alert("Successfully Updated!");
+            return false;
         }
-        build_handler_functions(newElems);
-        build_handlers_registration(newElems);
-        build_studio_exports(newElems);
 
 
-        alert("Successfully Updated!");
-        return false;
-      }
-
-
-        function build_handler_functions(elements) {
+        function build_handler_functions(elements){
 
             var elem = document.getElementById("handler-functions");
 
             var result = "window.gwd = window.gwd || {};";
-
+            
             for (let i = 0; i < elements.length; i++) {
-
-                result = result + "gwd.auto_Taparea_" + elements[i][0] + "Click = function(event) { event.preventDefault();event.stopPropagation();event.cancelBubble = true;gwd.actions.gwdGoogleAd.exit('gwd-ad', 'exit-" + elements[i][0] + "', '" + elements[i][1] + "', true, true, 'page1');};";
+            
+                result = result + "gwd.auto_Taparea_" + elements[i][0] + "Click = function(event) { event.preventDefault();event.stopPropagation();event.cancelBubble = true;gwd.actions.gwdGoogleAd.exit('gwd-ad', 'exit-" + elements[i][0] +"', '" + elements[i][1] + "', true, true, 'page1');};";
             }
-
-            elem.innerText = result;
+        
+            elem.innerText = result;            
         }
 
-        function build_handlers_registration(elements) {
-
+        function build_handlers_registration(elements){
+       
             var elem = document.getElementById("handlers-registration");
             var register = "gwd.actions.events.registerEventHandlers = function(event) {";
             var deregister = "gwd.actions.events.deregisterEventHandlers = function(event) {";
             var suffix = "};"
-
+           
             for (let i = 0; i < elements.length; i++) {
                 register = register + "gwd.actions.events.addHandler('gwd-taparea-" + elements[i][0] + "', 'click', gwd.auto_Taparea_" + elements[i][0] + "Click, false);"
 
                 deregister = deregister + "gwd.actions.events.removeHandler('gwd-taparea-" + elements[i][0] + "', 'click', gwd.auto_Taparea_" + elements[i][0] + "Click, false);";
-
-                if (elements[i] != 'default') {
+                
+                if (elements[i] != 'default'){
                     register = register + "gwd.actions.events.addHandler('gwd-taparea-" + elements[i][0] + "', 'touchend', gwd.auto_Taparea_" + elements[i][0] + "Click, false);"
                     deregister = deregister + "gwd.actions.events.removeHandler('gwd-taparea-" + elements[i][0] + "', 'touchend', gwd.auto_Taparea_" + elements[i][0] + "Click, false);";
                 }
-
+                
             }
             register = register + suffix;
             deregister = deregister + suffix;
@@ -492,24 +360,24 @@
             elem.innerText = register + deregister + call_suffix;
         }
 
-        function build_generate_exits(elements) {
+        function build_generate_exits(elements){
             var prefix = '<gwd-exit metric="a-generic" url="http://www.zalando.es"></gwd-exit>';
         }
 
-        function build_studio_exports(elements) {
+        function build_studio_exports(elements){
             var elem = document.getElementById("studio-exports");
             var prefix = 'function StudioExports() {';
             var suffix = '}';
             var result = prefix;
             for (let i = 0; i < elements.length; i++) {
-                result = result + 'Enabler.exit("exit-' + elements[i][0] + '","' + elements[i][1] + '");'
+                result = result + 'Enabler.exit("exit-' + elements[i][0] + '","' + elements[i][1] +'");'
             }
             result = result + suffix;
-
+            
             elem.innerText = result;
         }
 
-        function build_gwd_metadata(elements) {
+        function build_gwd_metadata(elements){
             var elem = document.getElementById("gwd-metadata");
 
             var prefix = '{"version":1,"type":"GoogleAd","format":"","template":"Banner 2.2.0","politeload":true,"fullscreen":false,"counters":[],"timers":[],"exits":['
@@ -519,200 +387,207 @@
             var exits_list = [];
             var exit = "";
             for (let i = 0; i < elements.length; i++) {
-                exit = '{"exitId":"exit-' + elements[i][0] + '", "url:"' + elements[i][1] + '"}'
-                exits_list.push(exit);
+                    exit = '{"exitId":"exit-' + elements[i][0] + '", "url:"' + elements[i][1] +'"}'
+                    exits_list.push(exit);
             }
 
             elem.innerText = prefix + exits_list.join(',') + suffix;
-
+           
         }
     </script>
 
     <script id="save_to_zip">
 
-        function saveToZip() {
+        function saveToZip(){
 
-            var elements = [{{ object_names | safe}}];
-        elements.push('default');
-        var output = document.getElementById('output');
-        copy = document.cloneNode(true);
+            var elements = [{{object_names | safe}}];
+            elements.push('default');
+            var output = document.getElementById('output');
+            copy = document.cloneNode(true);
 
-        var area;
-        var tapArea;
-        var textInput;
+            var area;
+            var tapArea;
+            var textInput;
 
-        for (let i = 0; i < elements.length; i++) {
-            area = copy.getElementById("area-" + elements[i]);
-            tapArea = copy.getElementById("gwd-taparea-" + elements[i]);
+            for (let i = 0; i < elements.length; i++) {
+                area = copy.getElementById("area-" + elements[i]);
+                tapArea = copy.getElementById("gwd-taparea-" + elements[i]);
 
-            if (area != null) {
-                area.removeAttribute("title");
+                if (area != null) {
+                    area.removeAttribute("title");
+                }
+
+                if (tapArea != null) {
+                    tapArea.removeAttribute("title");
+                }
             }
 
-            if (tapArea != null) {
-                tapArea.removeAttribute("title");
-            }
+            elem = copy.getElementById('main_header');
+            elem.remove();
+
+            elem = copy.getElementById('form_loader');
+            elem.remove();
+
+            elem = copy.getElementById('update_creative');
+            elem.remove();
+
+            elem = copy.getElementById('jscolor');
+            elem.remove();
+
+            elem = copy.getElementById('images_urls');
+            elem.remove();
+
+            elem = copy.getElementById('save_to_zip');
+            elem.remove();
+
+            elem = copy.getElementById('modifyer');
+            elem.remove();
+
+            elem = copy.getElementById('circle-size-slider');
+            elem.remove();
+
+            elem = copy.getElementById('circle-color-slider');
+            elem.remove();
+
+            image_name = "{{img_name}}";
+
+
+            copy.documentElement.innerHTML = copy.documentElement.innerHTML.replaceAll("{{img_url | safe}}", 'images/' + image_name);
+            copy.documentElement.innerHTML = copy.documentElement.innerHTML.replaceAll("{{img_url}}", 'images/' + image_name);
+
+            console.log(copy.documentElement.innerHTML);
+            copy.documentElement.innerHTML = copy.documentElement.innerHTML.replaceAll("static/images/transparent.gif", 'images/transparent.gif');
+            copy.documentElement.innerHTML = copy.documentElement.innerHTML.replaceAll("static/", "");
+            console.log(copy.documentElement.innerHTML);
+
+            const html_blob = new Blob([copy.documentElement.innerHTML], {type: 'text/html'});
+
+            var formData = new FormData();
+            formData.append("html_file",  html_blob, "creative.html");
+            formData.append("img_url", document.querySelector("img[id='capaRecorte']").src);
+            formData.append("img_name", image_name);
+
+            fetch("/generate_zip", {
+                method: "POST",
+                body: formData,
+                })
+                .then((response) => response.text())
+                .then((responseText) => {
+                    location.href =  responseText;
+                    alert('File downloaded. Clean & Start Over');
+                    setTimeout(() => { location.href = '/clean?zip_file_url='+ encodeURI(responseText) + '&img_url=' + encodeURI('{{img_url | safe}}'); }, 1000);
+                });
         }
-
-        elem = copy.getElementById('main_header');
-        elem.remove();
-
-        elem = copy.getElementById('form_loader');
-        elem.remove();
-
-        elem = copy.getElementById('update_creative');
-        elem.remove();
-
-        elem = copy.getElementById('jscolor');
-        elem.remove();
-
-        elem = copy.getElementById('images_urls');
-        elem.remove();
-
-        elem = copy.getElementById('save_to_zip');
-        elem.remove();
-
-        elem = copy.getElementById('modifyer');
-        elem.remove();
-
-        elem = copy.getElementById('circle-size-slider');
-        elem.remove();
-
-        elem = copy.getElementById('circle-color-slider');
-        elem.remove();
-
-        image_name = "{{img_name}}";
-
-
-        copy.documentElement.innerHTML = copy.documentElement.innerHTML.replaceAll("{{img_url | safe}}", 'images/' + image_name);
-        copy.documentElement.innerHTML = copy.documentElement.innerHTML.replaceAll("{{img_url}}", 'images/' + image_name);
-
-        console.log(copy.documentElement.innerHTML);
-        copy.documentElement.innerHTML = copy.documentElement.innerHTML.replaceAll("static/images/transparent.gif", 'images/transparent.gif');
-        copy.documentElement.innerHTML = copy.documentElement.innerHTML.replaceAll("static/", "");
-        console.log(copy.documentElement.innerHTML);
-
-        const html_blob = new Blob([copy.documentElement.innerHTML], { type: 'text/html' });
-
-        var formData = new FormData();
-        formData.append("html_file", html_blob, "creative.html");
-        formData.append("img_url", document.querySelector("img[id='capaRecorte']").src);
-        formData.append("img_name", image_name);
-
-        fetch("/generate_zip", {
-            method: "POST",
-            body: formData,
-        })
-            .then((response) => response.text())
-            .then((responseText) => {
-                location.href = responseText;
-                alert('File downloaded. Clean & Start Over');
-                setTimeout(() => { location.href = '/clean?zip_file_url=' + encodeURI(responseText) + '&img_url=' + encodeURI('{{img_url | safe}}'); }, 1000);
-            });
-      }
     </script>
 
-    <script id="handler-functions" type="text/javascript" gwd-events="handlers"></script>
-    <script id="handlers-registration" type="text/javascript" gwd-events="registration"></script>
+<script id="handler-functions" type="text/javascript" gwd-events="handlers"></script>
+<script id="handlers-registration" type="text/javascript" gwd-events="registration"></script>
 </head>
 
-<body style="margin: 0px">
+<body style="margin: 0px;">
+
+    
     <gwd-google-ad id="gwd-ad" polite-load="">
-        <gwd-metric-configuration> {{exit_metrics | safe}} </gwd-metric-configuration>
+        <gwd-metric-configuration>
+          {{exit_metrics | safe}}
+        </gwd-metric-configuration>
         <gwd-pagedeck id="pagedeck" data-gwd-offset-top="0px" data-gwd-offset-left="0px">
-            <gwd-page id="page1" data-gwd-width="100%" data-gwd-height="100%" class="gwd-page-wrapper">
-                <div class="gwd-page-content">
-                    <table style="border-spacing: 0">
-                        <tr>
-                            <td style="padding: 0px">
-                                <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                    <defs>{{clip_paths | safe}}</defs>
-                                </svg>
+          <gwd-page id="page1" data-gwd-width="100%" data-gwd-height="100%" class="gwd-page-wrapper">
+            <div class="gwd-page-content">
+<table style="border-spacing: 0;">
+    <tr>
+    <td style="padding: 0px">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1"  >
+        <defs>
+        {{clip_paths | safe}}
+        </defs>
+        </svg>
 
-                                <a id="gwd-taparea-default" href="#">
-                                    <figure id="figura">
-                                        <map name="recortes" id="recortes">
-                                            {{map_areas | safe}}
-                                            <img id="capaRecorte" src="{{img_url | safe}}" />
-                                        </map>
-                                        <svg id="svg-circles" xmlns="http://www.w3.org/2000/svg" version="1.1">
-                                            {{circles | safe}}
-                                        </svg>
-                                        <img src="static/images/transparent.gif" id="imagen" alt=""
-                                            usemap="#recortes" />
-                                    </figure>
-                                </a>
-                            </td>
-                            <td style="padding: 0px">
-                                <div>
-                                    <div id="circle-size-slider" class="slidecontainer">
-                                        <label>Circle Size</label>
-                                        <input id="circle-size" type="range" min="1" max="10" value="5" former-value="5"
-                                            class="slider" id="Slider" />
-                                    </div>
-                                    <div id="circle-color-slider" class="slidecontainer">
-                                        <label>Circle Color</label>
+        <a id="gwd-taparea-default" href="#">
+            <figure id=figura>
+                <map name="recortes" id=recortes>
+                {{map_areas | safe}}
+                <img id="capaRecorte" src="{{img_url | safe}}">
+                </map>
+                <svg id="svg-circles" xmlns="http://www.w3.org/2000/svg" version="1.1">
+                    {{circles | safe}}
+                </svg>
+                <img src="static/images/transparent.gif" id="imagen" alt="" usemap="#recortes" >
+            </figure>
+        </a>
+    </td>
+    <td style="padding: 0px;">
+        <div>
+            <div id="circle-size-slider" class="slidecontainer">
+                <label>Circle Size</label>
+                <input id="circle-size" type="range" min="1" max="10" value="5" former-value="5" class="slider" id="Slider">
+            </div>
+            <div id="circle-color-slider" class="slidecontainer">
+                <label>Circle Color</label>
 
-                                        <input id="circle-color" data-jscolor="{
+                <input id ="circle-color" data-jscolor="{
                     onInput:'handleColorChange(this)',
                     format: 'hex'
-                    }" />
-                                    </div>
-                                </div>
-                                <div id="objects_form"></div>
-                            </td>
-                        </tr>
-                    </table>
+                    }">
+            </div>
+        </div>
+        <div id="objects_form">
+        </div>
+    </td>
+    </tr>
+</table>
 
-                    <script gwd-served-sizes="" type="application/json">
-              ["{{width}}x{{height}}"]
-            </script>
-                    <script id="gwd-init-code">
-                        (function () {
-                            var gwdAd = document.getElementById("gwd-ad");
-                            /**
-                             * Handles the DOMContentLoaded event. The DOMContentLoaded event is
-                             * fired when the document has been completely loaded and parsed.
-                             */
 
-                            function handleDomContentLoaded(event) {
-                                // This is a good place to show a loading or branding image while
-                                // the ad loads.
-                            }
+<script gwd-served-sizes="" type="application/json">["{{width}}x{{height}}"]</script>
+<script id="gwd-init-code">
+    (function() {
 
-                            /**
-                             * Handles the WebComponentsReady event. This event is fired when all
-                             * custom elements have been registered and upgraded.
-                             */
-                            function handleWebComponentsReady(event) {
-                                // Start the Ad lifecycle.
-                                requestAnimationFrame(function () {
-                                    setTimeout(function () {
-                                        gwdAd.initAd();
-                                    }, 1);
-                                });
-                            }
+      var gwdAd = document.getElementById('gwd-ad');
+      /**
+       * Handles the DOMContentLoaded event. The DOMContentLoaded event is
+       * fired when the document has been completely loaded and parsed.
+       */
 
-                            /**
-                             * Handles the event that is dispatched after the Ad has been
-                             * initialized and before the default page of the Ad is shown.
-                             */
-                            function handleAdInitialized(event) {
-                                // This marks the end of the polite load phase of the Ad. If a
-                                // loading image was shown to the user, this is a good place to
-                                // remove it.
-                            }
+      function handleDomContentLoaded(event) {
+        // This is a good place to show a loading or branding image while
+        // the ad loads.
+      }
 
-                            window.addEventListener("DOMContentLoaded", handleDomContentLoaded, false);
-                            window.addEventListener("WebComponentsReady", handleWebComponentsReady, false);
-                            window.addEventListener("adinitialized", handleAdInitialized, false);
-                        })();
-                    </script>
-                </div>
-            </gwd-page>
-        </gwd-pagedeck>
-    </gwd-google-ad>
-    <script id="studio-exports" data-exports-type="gwd-studio-registration"></script>
+      /**
+       * Handles the WebComponentsReady event. This event is fired when all
+       * custom elements have been registered and upgraded.
+       */
+      function handleWebComponentsReady(event) {
+        // Start the Ad lifecycle.
+        requestAnimationFrame(function() {
+          setTimeout(function() {
+            gwdAd.initAd();
+          }, 1);
+        });
+      }
+
+      /**
+       * Handles the event that is dispatched after the Ad has been
+       * initialized and before the default page of the Ad is shown.
+       */
+      function handleAdInitialized(event) {
+        // This marks the end of the polite load phase of the Ad. If a
+        // loading image was shown to the user, this is a good place to
+        // remove it.
+      }
+
+      window.addEventListener('DOMContentLoaded',
+        handleDomContentLoaded, false);
+      window.addEventListener('WebComponentsReady',
+        handleWebComponentsReady, false);
+      window.addEventListener('adinitialized',
+        handleAdInitialized, false);
+    })();
+  </script>
+</div>
+</gwd-page>
+</gwd-pagedeck>
+</gwd-google-ad>
+<script id="studio-exports" data-exports-type="gwd-studio-registration"></script>
 </body>
-
 </html>

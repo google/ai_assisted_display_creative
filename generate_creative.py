@@ -103,7 +103,7 @@ def _get_polygons(objects_response, width, height, threshold):
   for localized_object in objects_response['responses'][0][
       'localizedObjectAnnotations']:
     normalized_vertices = localized_object['boundingPoly']['normalizedVertices']
-    name = localized_object['name']
+    name = localized_object['name'].replace(' ', '_')
     score = localized_object['score']
 
     if not name in OBJECT_FILTERS and score >= threshold:
