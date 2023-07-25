@@ -133,7 +133,33 @@ def _read_image(image_url):
   req = Request(image_url, headers=headers)
   resp = urlopen(req)
   return resp.read()
+  
 
+def _read_txt_file(url):
+  """Reads an image from internet
+
+  Args:
+      url (str): URL for the image
+
+  Returns:
+      string: for the file
+  """
+  #'Accept-Encoding': 'gzip, deflate, br',
+  headers = {
+      'User-Agent': (
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.11 (KHTML, like'
+          ' Gecko) Chrome/23.0.1271.64 Safari/537.11'
+      ),
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7',
+      'Accept-Language': 'en-US,en;q=0.9,es;q=0.8',
+      'Accept-Encoding': 'identity',
+      'Connection': 'keep-alive',
+  }
+
+  req = Request(url, headers=headers)
+  resp = urlopen(req)
+  return resp.read()
+  
 
 def _create_zip(zip_file_name, html_file, img_url, img_name, base_url):
   """Creates a zip file with the html and images files.
@@ -160,9 +186,9 @@ def _create_zip(zip_file_name, html_file, img_url, img_name, base_url):
   files.append((_read_image(img_url), img_name))
   files.append((_read_image(transparent_url), transparent_file_name))
   for file_name in CSS_FILES:
-    files_css.append((_read_image(f'{base_url}static/css/{file_name}'), file_name))
+    files_css.append((_read_txt_file(f'{base_url}static/css/{file_name}'), file_name))
   for file_name in JS_FILES:
-    files_js.append((_read_image(f'{base_url}static/js/{file_name}'), file_name))
+    files_js.append((_read_txt_file(f'{base_url}static/js/{file_name}'), file_name))
  
 
   with zipfile.ZipFile(mem_zip, mode='w') as zf:
