@@ -16,6 +16,8 @@ runtime: python38
 
 app_engine_apis: true
 
+default_expiration: "0d 0h"
+
 env_variables:
   GAE_ENV: "standard"
   API_KEY: "${vision_api_key}"

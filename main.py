@@ -133,7 +133,7 @@ def _read_image(image_url):
   req = Request(image_url, headers=headers)
   resp = urlopen(req)
   return resp.read()
-  
+
 
 def _read_txt_file(url):
   """Reads an image from internet
@@ -159,7 +159,7 @@ def _read_txt_file(url):
   req = Request(url, headers=headers)
   resp = urlopen(req)
   return resp.read()
-  
+
 
 def _create_zip(zip_file_name, html_file, img_url, img_name, base_url):
   """Creates a zip file with the html and images files.
@@ -177,7 +177,6 @@ def _create_zip(zip_file_name, html_file, img_url, img_name, base_url):
   mem_zip = BytesIO()
 
   transparent_url = f'{base_url}{TRANSPARENT_GIF}'
-  
  
   files = []
   files_js = []
@@ -189,7 +188,6 @@ def _create_zip(zip_file_name, html_file, img_url, img_name, base_url):
     files_css.append((_read_txt_file(f'{base_url}static/css/{file_name}'), file_name))
   for file_name in JS_FILES:
     files_js.append((_read_txt_file(f'{base_url}static/js/{file_name}'), file_name))
- 
 
   with zipfile.ZipFile(mem_zip, mode='w') as zf:
     for f, name in files:
