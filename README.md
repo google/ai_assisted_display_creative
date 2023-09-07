@@ -47,7 +47,7 @@ by running ```git clone http://github.com/google/ai_assisted_display_creative```
 Once the browser is opened and the webpage with the form appears:
 
 1. Paste the image URL, it must be of public access or the bot will not be able to retrieve it.
-2. Indicate the creative of the uploaded size. The process will cut on the width if greater but will not rescale.
+2. Indicate the right size of the uploaded creative. The process will cut on the width if greater but it will not rescale.
 3. Select a low threshold to detect as many objects as possible i.e 0.1.
 4. Click "Process" button.
 5. You can mouse over the circles in the image to show the label of the object.
